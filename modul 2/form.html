@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form World</title>
+
+    <style>
+        .contents {
+            border: 2px solid black;
+            padding: 15px;
+
+            position: fixed;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%,   -50%);
+        }
+
+        .form-element {
+            margin: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="contents">
+        <h2>Isi Data Diri</h2>
+
+        <div class="formcontent">
+            <form action="" id="formDataDiri" >
+                <div class="form-element">
+                    <label for="inputNama">Nama:</label><br>
+                    <input type="text" id="inputNama" name="nama" placeholder="Nama Anda" required><br>
+                </div>
+
+                <div class="form-element">
+                    <label for="InputDomisili">Domisili:</label><br>
+                    <input type="text" id="InputDomisili" name="domisili" placeholder="Domisi" required><br>
+                </div>
+                <div class="form-element">
+                    <input type="submit" value="submit data">
+                </div>
+            </form>
+        </div>
+        <h3 id="messageAfterSubmit"></h3>
+    </div>
+
+    <script>
+        // const submitAction = document.getElementById('formDataDiri');
+
+        // submitAction.addEventListener('submit', function(event) {
+        //     const inputNama = document.getElementById('inputNama').value;
+        //     const InputDomisili = document.getElementById('InputDomisili').value;
+        //     const hiddenPesan = `Halo, ${inputNama}, Bagaimana Cuacanya  di ${inputNama}`;
+
+        //     document.getElementById('messageAfterSubmit').innerText = hiddenPesan;
+        //     event.preventDefault();
+        // });
+
+
+        // pakai inline di html// 
+        // function textMuncul(e) {
+        //     const inputNama = document.getElementById('inputNama').value;
+        //     const InputDomisili = document.getElementById('InputDomisili').value;
+        //     const hiddenPesan = `Halo, ${inputNama}, Bagaimana Cuacanya  di ${inputNama}`;
+
+        //     document.getElementById('messageAfterSubmit').innerText = hiddenPesan;
+        //     e.preventDefault();
+        // }
+
+        //langsung di js//
+        function textMuncul(e) {
+            const inputNama = document.getElementById('inputNama').value;
+            const InputDomisili = document.getElementById('InputDomisili').value;
+            const hiddenPesan = `Halo, ${inputNama}, Bagaimana Cuacanya  di ${InputDomisili}`;
+
+            document.getElementById('messageAfterSubmit').innerText = hiddenPesan;
+            e.preventDefault();
+        }
+        document.getElementById('formDataDiri').onsubmit = textMuncul;
+    </script>
+</body>
+</html>
