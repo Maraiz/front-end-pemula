@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Storage World</title>
+    <style>
+        .contents {
+            border: 2px solid black;
+            padding: 15px;
+
+            position: fixed;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+        }
+
+        #generateButton {
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="contents" align="center">
+        <h1>Session Storage</h1>
+
+        <button id="incrementButton">Tambah nilai</button>
+        <button id="clear">Hapus storage</button>
+
+        <h3>Kamu sudah menekan tombol di atas sebanyak:</h3>
+        <h2 id="count">0</h2>
+    </main>
+
+    <script>
+        const sessionStorageKey = 'PRESS_FREQUENCY';
+
+        if(typeof Storage !== 'undefined') {
+            if (sessionStorage.getItem(sessionStorageKey) === null) {
+
+                sessionStorage.setItem(sessionStorageKey, 0);
+            }
+
+            const incrementButton = document.querySelector('#incrementButton');
+            const clearButton = document.querySelector('#clear');
+            const countDisplay = document.querySelector('#count');
+
+            countDisplay.innerText = sessionStorage.getItem(sessionStorageKey);
+
+            incrementButton.addEventListener('click', function() {
+                let count = sessionStorage.getItem(sessionStorageKey);
+                count++;
+                sessionStorage.setItem(sessionStorageKey, count);
+                countDisplay.innerText = sessionStorage.getItem(sessionStorageKey);
+            });
+
+            clearButton.addEventListener('click', function() {
+                sessionStorage.removeItem(sessionStorageKey);
+                countDisplay.innerText = 0;
+            });
+        } else {
+            alert('Browser yang Anda gunakan tidak mendukung Web Storage');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Storage World</title>
+    <style>
+        .contents {
+            border: 2px solid black;
+            padding: 15px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+        }
+
+        #generateButton {
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="contents" align="center">
+        <h1>Local Storage</h1>
+
+        <button id="incrementButton">Tambah nilai</button>
+        <button id="clear">Hapus storage</button>
+
+        <h3>Kamu sudah menekan tombol di atas sebanyak:</h3>
+        <h2 id="count">0</h2>
+    </main>
+
+    <script>
+        const localStorageKey = 'PRESS_FREQUENCY';
+        if (typeof Storage !== 'undefined') {
+            if (localStorage.getItem(localStorageKey) === null) {
+                localStorage.setItem(localStorageKey, 0);
+            }
+            const incrementButton = document.querySelector('#incrementButton');
+            const clearButton = document.querySelector('#clear');
+            const countDisplay = document.querySelector('#count');
+
+            countDisplay.innerText = localStorage.getItem(localStorageKey);
+
+            incrementButton.addEventListener('click', function () {
+                let count = localStorage.getItem(localStorageKey);
+                count++;
+                localStorage.setItem(localStorageKey, count);
+                countDisplay.innerText = localStorage.getItem(localStorageKey);
+
+                if (count == 5) {
+                    if (!document.querySelector('#hiddenMessage')) {
+                        const pesan = document.createElement('h4');
+                        pesan.innerHTML = '<i>Selamat! Kamu menemukan sebuah hadiah tersembunyi</i>';
+
+                        const gambar = document.createElement('img');
+                        gambar.setAttribute('src', 'https://raw.githubusercontent.com/dicodingacademy/a315-web-pemula-labs/shared-files/catto.jpg')
+                        pesan.id = 'hiddenMessageText';
+                        gambar.id = 'hiddenMessageImg';
+                        const posisi = document.querySelector('.contents');
+                        posisi.appendChild(pesan);
+                        posisi.appendChild(gambar);
+                    }
+                }
+            });
+
+            clearButton.addEventListener('click', function () {
+                localStorage.removeItem(localStorageKey);
+                countDisplay.innerText = 0;
+
+                const pesan = document.querySelector('#hiddenMessageText');
+                const gambar = document.querySelector('#hiddenMessageImg');
+                if (pesan) {
+                    pesan.remove();
+                }
+                if (gambar) {
+                    gambar.remove();
+                }
+
+            });
+        } else {
+            alert('Browser yang Anda gunakan tidak mendukung Web Storage')
+        }
+
+
+
+    </script>
+</body>
+
+</html>
